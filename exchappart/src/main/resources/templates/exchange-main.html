@@ -12,6 +12,16 @@
 <div class="mt-5 ms-5">
     <h1>Квартири очікують обміну</h1>
 </div>
+    <main class="container">
+        <div th:each="el : ${applications}" class="bg-light p-5 rounded mt-4 mb-3 ">
+            <h3>Квартира - <span th:text="${el.region}"/> район</h3>
+            <p>Площа: <span th:text="${el.area}"/> м2</p>
+            <p>Кількість кімнат: <span th:text="${el.rooms}"/></p>
+            <p>Поверх: <span th:text="${el.floor}"/></p>
+            <p>Місто: <span th:text="${el.city}"/></p>
+            <p>т. <span th:text="${el.number}"/></p>
+        </div>
+    </main>
 </div>
 
 <div th:insert="blocks/footer :: footer"></div>
