@@ -8,10 +8,10 @@
 <body>
 <header th:insert="blocks/header :: header"></header>
 
-<div class="conteiner">
-<div class="mt-5 ms-5">
-    <h1>Квартири очікують обміну</h1>
-</div>
+<div class="container">
+    <div class="mt-5 ms-5">
+        <h1>Квартири очікують обміну</h1>
+    </div>
     <main class="container">
         <div th:each="el : ${applications}" class="bg-light p-5 rounded mt-4 mb-3 ">
             <h3>Квартира - <span th:text="${el.region}"/> район</h3>

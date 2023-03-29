@@ -44,12 +44,7 @@ public class createController {
                 wantregion,
                 number);
         applicationRepository.save(application);
-        return "redirect:/";
+        long id = application.getId();
+        return "redirect:/exchange/" + id;
     }
-
-//    @GetMapping("/create/available/{id}")
-//    public String createWantedPage(@PathVariable(value = "id") long id, Model model){
-//        availableRepository.
-//        return "create-page";
-//    }
 }
