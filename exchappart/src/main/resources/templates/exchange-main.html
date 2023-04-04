@@ -14,7 +14,7 @@
     </div>
     <main class="container">
         <div th:each="el : ${applications}" class="bg-light p-5 rounded mt-4 mb-3 ">
-            <h3>Квартира - <span th:text="${el.region}"/> район</h3>
+            <h3>Квартира - <span th:text="${el.region}"/></h3>
             <p>Площа: <span th:text="${el.area}"/> м2</p>
             <p>Кількість кімнат: <span th:text="${el.rooms}"/></p>
             <p>Поверх: <span th:text="${el.floor}"/></p>

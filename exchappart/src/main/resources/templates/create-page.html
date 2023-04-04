@@ -21,6 +21,7 @@
                         <td><h6>Введіть дані про свою квартиру</h6></td>
                         <td></td>
                         <td></td>
+                        <td></td>
                         <td><h6>Введіть дані про бажану квартиру</h6></td>
                         <td></td>
                     </tr>
@@ -32,10 +33,23 @@
                                    class="form-control" required>
                         </td>
                         <td></td>
-                        <td><b>Кількість кімнат:</b></td>
+                        <td></td>
+                        <td><b>Поверх:</b></td>
                         <td>
-                            <input type="number" min="1" max="6" name="wantrooms" placeholder="Введіть дані"
-                                   class="form-control" required>
+                            <select name="wantfloor" class="form-control">
+                                <option value="-">-Виберіть поверх-</option>
+                                <option value="неважливий">неважливий</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="вище">вище</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
@@ -44,23 +58,42 @@
                             <input type="number" name="area" placeholder="Введіть дані" class="form-control" required>
                         </td>
                         <td></td>
-                        <td><b>Площа(м2):</b></td>
+                        <td></td>
+                        <td><b>Район:</b></td>
                         <td>
-                            <input type="number" name="wantarea" placeholder="Введіть дані" class="form-control"
-                                   required>
+                            <select name="wantregion" class="form-control">
+                                <option value="-">-Виберіть район-</option>
+                                <option value="неважливий">неважливий</option>
+                                <option value="Франківський район">Франківський район</option>
+                                <option value="Залізничний район">Залізничний район</option>
+                                <option value="Шевченківський район">Шевченківський район</option>
+                                <option value="Личаківський район">Личаківський район</option>
+                                <option value="Галицький район">Галицький район</option>
+                                <option value="Сихівський район">Сихівський район</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
                         <td><b>Поверх:</b></td>
                         <td>
-                            <input type="number" name="floor" placeholder="Введіть дані" class="form-control" required>
+                            <select name="floor" class="form-control">
+                                <option value="-">-Виберіть поверх-</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="вище">вище</option>
+                            </select>
                         </td>
                         <td></td>
-                        <td><b>Поверх:</b></td>
-                        <td>
-                            <input type="number" name="wantfloor" placeholder="Введіть дані" class="form-control"
-                                   required>
-                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td><b>Місто:</b></td>
@@ -69,25 +102,38 @@
                                    readonly required>
                         </td>
                         <td></td>
-                        <td><b>Район:</b></td>
-                        <td>
-                            <input type="text" name="wantregion" placeholder="Введіть дані" class="form-control"
-                                   required>
-                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td><b>Район:</b></td>
                         <td>
-                            <input type="text" name="region" placeholder="Введіть дані" class="form-control" required>
+                            <select name="region" class="form-control">
+                                <option value="-">-Виберіть район-</option>
+                                <option value="Франківський район">Франківський район</option>
+                                <option value="Залізничний район">Залізничний район</option>
+                                <option value="Шевченківський район">Шевченківський район</option>
+                                <option value="Личаківський район">Личаківський район</option>
+                                <option value="Галицький район">Галицький район</option>
+                                <option value="Сихівський район">Сихівський район</option>
+                            </select>
                         </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td><b>Телефон:</b></td>
                         <td>
-                            <input type="tel" name="number" placeholder="Введіть дані" class="form-control" value="+380"
-                                   pattern="+[0-9]{9}" required>
+<!--                            <div class="alert alert-danger" role="alert">Номер телефону введено некоректно</div>-->
+                            <input type="tel" name="number" placeholder="+380" class="form-control"
+                                   pattern="{+380}[0-9]{9}" required>
                         </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td></td>
                     </tr>
                 </table>

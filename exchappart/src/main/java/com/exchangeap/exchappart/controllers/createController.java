@@ -23,23 +23,19 @@ public class createController {
     public String availableApartAdd(
             @RequestParam Integer rooms,
             @RequestParam Float area,
-            @RequestParam Integer floor,
             @RequestParam String city,
+            @RequestParam String floor,
+            @RequestParam String wantfloor,
             @RequestParam String region,
-            @RequestParam String number,
-            @RequestParam Integer wantrooms,
-            @RequestParam Float wantarea,
-            @RequestParam Integer wantfloor,
             @RequestParam String wantregion,
+            @RequestParam String number,
             Model model){
         Application application = new Application(
                 rooms,
-                wantrooms,
+                area,
+                city,
                 floor,
                 wantfloor,
-                area,
-                wantarea,
-                city,
                 region,
                 wantregion,
                 number);
