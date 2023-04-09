@@ -18,7 +18,6 @@ import java.util.Optional;
 public class exchangeController {
     @Autowired
     private ApplicationRepository applicationRepository;
-
     @GetMapping("/exchange")
     public String exchange(Model model) {
         Iterable<Application> applications = applicationRepository.findAll();
@@ -146,9 +145,18 @@ public class exchangeController {
 
     @PostMapping("/exchange/{id}/remove")
     public String applicationDelete(@PathVariable(value="id") long id, Model model){
-
         Application application = applicationRepository.findById(id).orElseThrow();
         applicationRepository.delete(application);
+        return "redirect:/";
+    }
+
+    @PostMapping("/exchange/{applicationId}/{variantId}/exchanged")
+    public String applicationExchanged(@PathVariable(value="applicationId") long applicationId,
+                                       @PathVariable(value="variantId") long variantId, Model model){
+        Application application = applicationRepository.findById(applicationId).orElseThrow();
+        applicationRepository.delete(application);
+        Application variant = applicationRepository.findById(variantId).orElseThrow();
+        applicationRepository.delete(variant);
         return "redirect:/";
     }
 }
