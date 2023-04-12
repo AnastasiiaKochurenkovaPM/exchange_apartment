@@ -1,17 +1,37 @@
 package com.exchangeap.exchappart.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.Instant;
+
 @Entity
 public class Application {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(nullable = false)
     private int rooms;
+    @Column(nullable = false)
     private float area;
-    private String city, floor, region,  wantfloor, wantregion, number;
+    @Column(nullable = false)
+    private String city;
+    @Column(nullable = false)
+    private String floor;
+    @Column(nullable = false)
+    private String region;
+    @Column(nullable = false)
+    private String wantfloor;
+    @Column(nullable = false)
+    private String wantregion;
+    @Column(nullable = false)
+    private String number;
+    @CreationTimestamp()
+    private Instant createDateTime;
+
+    @UpdateTimestamp
+    private Instant updateDateTime;
 
     public Long getId() {
         return id;
@@ -27,22 +47,6 @@ public class Application {
 
     public void setRooms(int rooms) {
         this.rooms = rooms;
-    }
-
-    public String getFloor() {
-        return floor;
-    }
-
-    public void setFloor(String floor) {
-        this.floor = floor;
-    }
-
-    public String getWantfloor() {
-        return wantfloor;
-    }
-
-    public void setWantfloor(String wantfloor) {
-        this.wantfloor = wantfloor;
     }
 
     public float getArea() {
@@ -61,12 +65,28 @@ public class Application {
         this.city = city;
     }
 
+    public String getFloor() {
+        return floor;
+    }
+
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
+
     public String getRegion() {
         return region;
     }
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public String getWantfloor() {
+        return wantfloor;
+    }
+
+    public void setWantfloor(String wantfloor) {
+        this.wantfloor = wantfloor;
     }
 
     public String getWantregion() {
@@ -83,6 +103,22 @@ public class Application {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public Instant getCreateDateTime() {
+        return createDateTime;
+    }
+
+    public void setCreateDateTime(Instant createDateTime) {
+        this.createDateTime = createDateTime;
+    }
+
+    public Instant getUpdateDateTime() {
+        return updateDateTime;
+    }
+
+    public void setUpdateDateTime(Instant updateDateTime) {
+        this.updateDateTime = updateDateTime;
     }
 
     public Application() {

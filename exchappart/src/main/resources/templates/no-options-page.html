@@ -14,41 +14,39 @@
         <div class="mt-5 ms-5">
             <h1>Заявка</h1>
         </div>
-        <div th:each="el : ${applications}" class="bg-light p-3 rounded mt-2 mb-2 ">
-            <table class="table table-condensed">
-                <tr>
-                    <td><h3>Квартира - <span th:text="${el.region}"/></h3></td>
-                    <td></td>
-                    <td><h5>Мої побажання</h5></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><p>Площа: <span th:text="${el.area}"/> м2</p></td>
-                    <td></td>
-                    <td><p>Район: <span th:text="${el.wantregion}"/></p></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><p>Кількість кімнат: <span th:text="${el.rooms}"/></p></td>
-                    <td><b>--------------></b></td>
-                    <td><p>Поверх: <span th:text="${el.wantfloor}"/></p></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><p>Поверх: <span th:text="${el.floor}"/></p></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><p>Місто: <span th:text="${el.city}"/></p></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><p>т. <span th:text="${el.number}"/></p></td>
-                    <td></td>
-                </tr>
-            </table>
+        <div th:each="el : ${applications}">
+            <div class="row bg-light p-5 rounded mt-2 mb-2 ">
+                <div class="col-md-8">
+                    <h3>Квартира - <span th:text="${el.region}"/></h3>
+                    <p>Площа: <span th:text="${el.area}"/> м2</p>
+                    <p>Кількість кімнат: <span th:text="${el.rooms}"/></p>
+                    <p>Поверх: <span th:text="${el.floor}"/></p>
+                    <p>Місто: <span th:text="${el.city}"/></p>
+                    <p>т. <span th:text="${el.number}"/></p>
+                </div>
+                <div class="col-md-4 ms-auto">
+                    <h5>Мої побажання</h5>
+                    <p>Район: <span th:text="${el.wantregion}"/></p>
+                    <p>Поверх: <span th:text="${el.wantfloor}"/></p>
+                </div>
+
+                <div class="col-md-4 ms-auto">
+                    <div class="row">
+                        <div class="col-md-6 ms-auto">
+                            <a th:href="'/exchange/' + ${el.id} + '/edit'">
+                                <button class="w-30 btn btn-lg btn-success me-2 " type="submit">
+                                    Редагувати</font></button>
+                            </a>
+                        </div>
+                        <div class="col-md-6 ms-auto">
+                            <form th:action="'/exchange/' + ${el.id} + '/remove'" method="post">
+                                <button class="w-30 btn btn-lg btn-success ms-2" type="submit">
+                                    Видалити </font></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
