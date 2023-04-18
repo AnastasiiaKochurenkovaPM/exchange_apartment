@@ -16,15 +16,15 @@
 </div>
 
 <main class="container">
-    <form action="/" method="post">
+    <div th:each="el : ${search}">
+        <!--        <form th:action="/search/${el.id}" method="post">-->
         <div class="row">
             <div class="col-3">
                 <div class="row">
-
                     <b>Поверх:</b>
                     <div class="col-6">
                         <select name="fromsearchfloor" class="form-control">
-                            <option value="null">Від</option>
+                            <option th:value="${el.fromsearchfloor}"><span th:text="${el.fromsearchfloor == 'null' ? 'Від' : el.fromsearchfloor}"/></option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="col-6">
                         <select name="tosearchfloor" class="form-control">
-                            <option value="null">До</option>
+                            <option th:value="${el.tosearchfloor}"><span th:text="${el.tosearchfloor == 'null' ? 'До' : el.tosearchfloor}"/></option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -75,13 +75,11 @@
                         </select>
                     </div>
                 </div>
-
-
-                </div>
+            </div>
             <div class="col-3">
                 <b>Кількість кімнат:</b>
                 <select name="searchrooms" class="form-control">
-                    <option value="0">Всі оголошення</option>
+                    <option th:value="${el.searchrooms}"><span th:text="${el.searchrooms}"/></option>
                     <option value="1">1 кімната</option>
                     <option value="2">2 кімнати</option>
                     <option value="3">3 кімнати</option>
@@ -92,8 +90,8 @@
             </div>
             <div class="col-3">
                 <b>Район:</b>
-                <select name="searchregion" class="form-control">
-                    <option value="null">Всі оголошення</option>
+                <select id="searchregionlist" name="searchregion" class="form-control">
+                    <option th:value="${el.searchregion}"><span th:text="${el.searchregion == 'null' ? 'Всі оголошення' : el.searchregion}"/></option>
                     <option value="Франківський район">Франківський район</option>
                     <option value="Залізничний район">Залізничний район</option>
                     <option value="Шевченківський район">Шевченківський район</option>
@@ -118,15 +116,15 @@
                     <form method="post">
                         <button class="btn btn-lg btn-success" type="submit">
                             Очистити</font></button>
-                    </form>
+                        </form>
                 </div>
             </div>
         </div>
-    </form>
+        <!--        </form>-->
+    </div>
 
 
-
-    <div th:each="el : ${applications}" class="bg-light p-5 rounded mt-4 mb-3 ">
+    <div th:each="el : ${options}" class="bg-light p-5 rounded mt-4 mb-3 ">
         <h3>Квартира - <span th:text="${el.region}"/></h3>
         <p>Площа: <span th:text="${el.area}"/> м2</p>
         <p>Кількість кімнат: <span th:text="${el.rooms}"/></p>
@@ -135,6 +133,7 @@
         <p>т. <span th:text="${el.number}"/></p>
     </div>
 </main>
+
 
 <div th:insert="blocks/footer :: footer"></div>
 </body>
