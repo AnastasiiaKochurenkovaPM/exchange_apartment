@@ -6,8 +6,11 @@ import com.exchangeap.exchappart.repository.ApplicationRepository;
 import com.exchangeap.exchappart.repository.SearchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,19 +23,13 @@ public class searchController {
     @Autowired
     private ApplicationRepository applicationRepository;
 
-    //    @GetMapping("/search")
-//    public String searchPage(Model model){
-//        Iterable<Application> applications = applicationRepository.findAll();
-//        model.addAttribute("applications", applications);
-//        return "main-search";
-//    }
     @GetMapping("/search/{id}")
     public String searchPage(@PathVariable(value = "id") Long id, org.springframework.ui.Model model) {
         Optional<Search> search = searchRepository.findById(id);
 
         // Перевірка наявності заявки з заданим id
         if (search.isEmpty()) {
-            return "main";
+            return "error-page";
         }
 
         ArrayList<Search> result = new ArrayList<>();
@@ -51,11 +48,24 @@ public class searchController {
                 int fromsearchfloor = app.getFromsearchfloor().equals("null") ? 0 : Integer.parseInt(app.getFromsearchfloor());
                 int floor = Integer.parseInt(option.getFloor());
                 int tosearchfloor = app.getTosearchfloor().equals("null") ? 0 : Integer.parseInt(app.getTosearchfloor());
-                if ((app.getSearchrooms() == 0 || option.getRooms() == app.getSearchrooms()) &&
-                        ((fromsearchfloor == 0 && tosearchfloor == 0) ||
-                                (floor <= tosearchfloor && floor >= fromsearchfloor)) &&
-                        (app.getSearchregion().equals("null") || option.getRegion() == app.getSearchregion())) {
-                    options.add(option);
+                if(app.getSearchrooms() == 0 ||
+                        option.getRooms() == app.getSearchrooms()){
+                    if(app.getSearchregion().equals("null") ||
+                            option.getRegion().equals(app.getSearchregion())){
+                        if(fromsearchfloor == 0 && tosearchfloor == 0){
+                            options.add(option);
+                        } else if(fromsearchfloor != 0 && tosearchfloor != 0 || fromsearchfloor == 0){
+                            if(floor <= tosearchfloor
+                                        && floor >= fromsearchfloor){
+                                options.add(option);
+                            }
+                        } else if(tosearchfloor == 0){
+                        if(floor <= tosearchfloor
+                                || floor >= fromsearchfloor){
+                            options.add(option);
+                        }
+                        }
+                    }
                 }
             }
         } else if (app.getFromsearchfloor() != "null" &&
@@ -82,5 +92,42 @@ public class searchController {
         }
         model.addAttribute("options", options);
         return "main-search";
+    }
+
+    @PostMapping("/search/{id}")
+    public String searchEdit(@PathVariable(value="id") long id,
+            @RequestParam(required = false) String fromsearchfloor,
+            @RequestParam(required = false) String tosearchfloor,
+            @RequestParam(required = false) Integer searchrooms,
+            @RequestParam(required = false) String searchregion,
+            Model model) {
+        //перевірка коректності вводу поверху(переставлення місцями)
+        if (tosearchfloor != null && fromsearchfloor != null) {
+            try {
+                int toFloor = Integer.parseInt(tosearchfloor);
+                int fromFloor = Integer.parseInt(fromsearchfloor);
+                if (toFloor < fromFloor) {
+                    String temp = tosearchfloor;
+                    tosearchfloor = fromsearchfloor;
+                    fromsearchfloor = temp;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println(e);
+            }
+        }
+        Search search = searchRepository.findById(id).orElseThrow();
+        search.setFromsearchfloor(fromsearchfloor);
+        search.setTosearchfloor(tosearchfloor);
+        search.setSearchrooms(searchrooms);
+        search.setSearchregion(searchregion);
+        searchRepository.save(search);
+        return "redirect:/search/" + id;
+    }
+
+    @PostMapping("/search/{id}/remove")
+    public String searchDelete(@PathVariable(value="id") long id, Model model){
+        Search search = searchRepository.findById(id).orElseThrow();
+        searchRepository.delete(search);
+        return "redirect:/";
     }
 }
